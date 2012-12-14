@@ -1,0 +1,14 @@
+[
+    {
+        "caption": ":wq - Save and Quit",
+        "command": "save_quit"
+    },
+    {
+        "caption": ":q! - Force Quit",
+        "command": "force_quit"
+    },
+    {
+        "caption": ":q - Quit",
+        "command": "quit"
+    }
+]
