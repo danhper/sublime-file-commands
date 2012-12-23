@@ -9,6 +9,10 @@
     },
     {
         "caption": ":q - Quit",
-        "command": "quit"
+        "command": "try_quit"
+    },
+    {
+        "caption": ":e - Open file",
+        "command": "vim_open_file"
     }
 ]
