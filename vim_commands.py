@@ -133,8 +133,15 @@ class VimOpenFile(sublime_plugin.WindowCommand):
             self.make_quick_panel(text.strip())
 
     def make_quick_panel(self, path):
+        self.path = path
         self.files = self.get_files(path)
-        sublime.set_timeout(lambda: self.window.show_quick_panel(self.files, self.update_path), 1)
+        # not working without timeout
+        sublime.set_timeout(lambda: self.window.show_quick_panel(self.files, self.update_path, sublime.MONOSPACE_FONT, 0, self.show_file_preview), 1)
+
+    def show_file_preview(self, index):
+        path = os.path.join(self.path, self.files[index])
+        if os.path.isfile(path):
+            self.window.open_file(path, sublime.TRANSIENT)
 
     def get_files(self, directory):
         dirname = os.path.dirname(directory)
