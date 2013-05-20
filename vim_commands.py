@@ -141,7 +141,7 @@ class VimOpenFile(sublime_plugin.WindowCommand):
     def show_file_preview(self, index):
         path = os.path.join(self.path, self.files[index])
         if os.path.isfile(path):
-            self.window.open_file(path, sublime.TRANSIENT)
+            self.previewed = self.window.open_file(path, sublime.TRANSIENT)
 
     def get_files(self, directory):
         dirname = os.path.dirname(directory)
@@ -162,6 +162,9 @@ class VimOpenFile(sublime_plugin.WindowCommand):
             current_dir += '/'
         if index == -1:
             selected = ''
+            if self.previewed is not None:
+                self.previewed.close()
+                self.previewed = None
         else:
             selected = self.files[index]
         if selected:
