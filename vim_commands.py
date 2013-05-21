@@ -107,10 +107,10 @@ class VimOpenFile(sublime_plugin.WindowCommand):
                         self.set_error("directory {0} \
                             does not exist".format(dirname))
                     else:
-                        os.mkdir(dirname)
+                        os.makedirs(dirname, 0o755, True)
                         self.window.open_file(text)
         except:
-            self.set_error()
+            self.set_error(text)
 
     def set_error(self, filename, msg=''):
         if not self.current_view:
