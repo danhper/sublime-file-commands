@@ -162,7 +162,7 @@ class VimOpenFile(sublime_plugin.WindowCommand):
             current_dir += '/'
         if index == -1:
             selected = ''
-            if self.previewed is not None:
+            if self.previewed is not None and self.previewed != self.current_view:
                 self.previewed.close()
                 self.previewed = None
         else:
