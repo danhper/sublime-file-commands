@@ -73,6 +73,7 @@ class VimOpenFile(sublime_plugin.WindowCommand):
     def init(self):
         self.settings = sublime.load_settings("VimCommands.sublime-settings")
         self.done = False
+        self.views = self.window.views()
 
     def run(self):
         self.init()
@@ -166,7 +167,7 @@ class VimOpenFile(sublime_plugin.WindowCommand):
             current_dir += '/'
         if index == -1:
             selected = ''
-            if self.previewed is not None and self.previewed != self.current_view:
+            if self.previewed is not None and not self.previewed in self.views:
                 self.previewed.close()
                 self.previewed = None
         else:
