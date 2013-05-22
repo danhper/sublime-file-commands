@@ -170,6 +170,8 @@ class VimOpenFile(sublime_plugin.WindowCommand):
             if self.previewed is not None and not self.previewed in self.views:
                 self.previewed.close()
                 self.previewed = None
+            if self.current_view:
+                self.window.focus_view(self.current_view)
         else:
             selected = self.files[index]
         if selected:
