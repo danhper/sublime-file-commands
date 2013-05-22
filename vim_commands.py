@@ -72,6 +72,7 @@ class VimOpenFile(sublime_plugin.WindowCommand):
     # cant override __init__ ><
     def init(self):
         self.settings = sublime.load_settings("VimCommands.sublime-settings")
+        self.done = False
 
     def run(self):
         self.init()
@@ -111,6 +112,7 @@ class VimOpenFile(sublime_plugin.WindowCommand):
                         self.window.open_file(text)
         except:
             self.set_error(text)
+        self.done = True
 
     def set_error(self, filename, msg=''):
         if not self.current_view:
@@ -155,6 +157,8 @@ class VimOpenFile(sublime_plugin.WindowCommand):
         return files
 
     def update_path(self, index):
+        if self.done:
+            return
         input_region = self.input_panel.full_line(0)
         current_path = self.input_panel.substr(input_region).rstrip('\t')
         current_dir = os.path.dirname(current_path)
