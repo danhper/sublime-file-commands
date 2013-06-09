@@ -74,6 +74,7 @@ class VimOpenFile(sublime_plugin.WindowCommand):
         self.settings = sublime.load_settings("VimCommands.sublime-settings")
         self.done = False
         self.views = self.window.views()
+        self.previewed = None
 
     def run(self):
         self.init()
