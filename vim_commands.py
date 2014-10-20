@@ -12,7 +12,7 @@ def get_home_dir():
 
 class WindowCommandExtension(sublime_plugin.WindowCommand):
     def close_if_no_file(self):
-        if not self.window.views():
+        if not self.window.views() and not self.window.folders():
             self.window.run_command("close_window")
 
     def close_file_and_window(self):
