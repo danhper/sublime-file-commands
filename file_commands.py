@@ -68,10 +68,10 @@ class Quit(WindowCommandExtension):
         self.close_if_no_file()
 
 
-class VimOpenFile(sublime_plugin.WindowCommand):
+class OpenOrCreateFile(sublime_plugin.WindowCommand):
     # cant override __init__ ><
     def init(self):
-        self.settings = sublime.load_settings("VimCommands.sublime-settings")
+        self.settings = sublime.load_settings("FileCommands.sublime-settings")
         self.done = False
         self.views = self.window.views()
         self.previewed = None

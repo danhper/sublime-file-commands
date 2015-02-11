@@ -13,6 +13,6 @@
     },
     {
         "caption": ":e - Open file",
-        "command": "vim_open_file"
+        "command": "open_or_create_file"
     }
 ]
