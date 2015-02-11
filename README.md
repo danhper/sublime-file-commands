@@ -1,10 +1,16 @@
 # sublime-file-commands
 
+## Installation
+
+Install the package as `FileCommands` through Package Control.
+
+## Usage
+
 This package has the following commands to work with file
 more easily.
 
 * `open_or_create_file`
-    Open or create a file
+    Opens or creates a file.
     Will also create all directories in between when needed when creating file.
 
 * `save_quit`
