@@ -16,7 +16,7 @@ class WindowCommandExtension(sublime_plugin.WindowCommand):
         return view.file_name() and os.path.isfile(view.file_name())
 
     def should_save(self, view):
-        return view.is_dirty() or not self.file_exists(view)
+        return view.is_dirty() or (view.file_name() and not self.file_exists(view))
 
 
 class SaveQuit(WindowCommandExtension):
