@@ -3,13 +3,6 @@ import sublime_plugin
 import os
 
 
-def get_home_dir():
-    if sublime.platform() == 'windows':
-        return os.environ['USERPROFILE']
-    else:
-        return os.environ['HOME']
-
-
 class WindowCommandExtension(sublime_plugin.WindowCommand):
     def close_if_no_file(self):
         if not self.window.views() and not self.window.folders():
@@ -19,13 +12,19 @@ class WindowCommandExtension(sublime_plugin.WindowCommand):
         self.window.run_command("close_file")
         self.close_if_no_file()
 
+    def file_exists(self, view):
+        return view.file_name() and os.path.isfile(view.file_name())
+
+    def should_save(self, view):
+        return view.is_dirty() or not self.file_exists(view)
+
 
 class SaveQuit(WindowCommandExtension):
     def run(self):
         v = self.window.active_view()
         if v is None:
             return
-        if v.is_dirty():
+        if self.should_save(v):
             v.run_command("save")
         self.close_file_and_window()
 
@@ -35,8 +34,8 @@ class ForceQuit(WindowCommandExtension):
         v = self.window.active_view()
         if v is None:
             return
-        if v.is_dirty():
-            if v.file_name():
+        if self.should_save(v):
+            if self.file_exists(v):
                 v.run_command("revert")
             else:
                 v.set_scratch(True)
@@ -48,7 +47,7 @@ class TryQuit(WindowCommandExtension):
         v = self.window.active_view()
         if v is None:
             return
-        if v.is_dirty():
+        if self.should_save(v):
             self.window.run_command("get_confirmation", {
                 'caption': "Save changes?",
                 'on_yes': "save_quit",

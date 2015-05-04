@@ -18,7 +18,7 @@ more easily.
     Closes Sublime Text if it is the last file open and no directory or project is opened.
 
 * `try_quit`
-    Closes the file (or prompt if not saved).
+    Closes the file (or uses an Emacs like prompt to ask if not saved).
     Closes Sublime Text if it is the last file open and no directory or project is opened.
 
 * `force_quit`
@@ -40,5 +40,3 @@ but any keybings works perfectly, for example:
 Open file screenshot:
 
 ![screenshot-1423632337](https://cloud.githubusercontent.com/assets/1436271/6142441/e980dfe2-b1f9-11e4-828d-0fbe6f277199.png)
-
-
